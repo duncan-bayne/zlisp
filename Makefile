@@ -1,6 +1,6 @@
 CC = sdcc
 LINK_FLAGS = --no-std-crt0 -mz80 --opt-code-size --code-loc 0xC100 --data-loc 0x1000
-COMPILE_FLAGS = --no-std-crt0 -mz80 --opt-code-size --code-loc 0xC100 --data-loc 0x1000
+COMPILE_FLAGS = --no-std-crt0 -mz80 --opt-code-size --code-loc 0xC100 --data-loc 0x1000 --Werror
 REL_FILES = obj/crt0.rel obj/amsgraph.rel obj/amstext.rel obj/main.rel obj/lisp.rel
 TEST_REL_FILES = $(REL_FILES) obj/lisp_tests.rel
 
