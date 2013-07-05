@@ -3,18 +3,13 @@
 void _test_success();
 void _test_failure();
 
-void _test_success()
+void test_print_cell()
 {
-  assert(0 == 0);
-}
-
-void _test_failure()
-{
-  assert(1 == 0);
+  cons_cell *cell = new_cell(1, 2, 0);
+  print_cell(cell);
 }
 
 void lisp_tests()
 {
-  _test_success();
-  _test_failure();
+  test_print_cell();
 }

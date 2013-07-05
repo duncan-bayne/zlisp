@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include "assert.h"
+#include "../src/lisp.h"
 
 void lisp_tests(void);
 
