@@ -3,7 +3,7 @@ LINK_FLAGS = --no-std-crt0 -mz80 --opt-code-size --code-loc 0xC100 --data-loc 0x
 COMPILE_FLAGS = --no-std-crt0 -mz80 --opt-code-size --code-loc 0xC100 --data-loc 0x1000 --Werror
 # TODO: add obj/lisp.rel
 REL_FILES = obj/crt0.rel obj/amsgraph.rel obj/amstext.rel obj/main.rel obj/cons_cell.rel
-TEST_REL_FILES = $(REL_FILES) obj/lisp_tests.rel
+TEST_REL_FILES = $(REL_FILES) obj/lisp_tests.rel obj/cons_cell_tests.rel
 
 all: clean assemble_libs_release compile_release link rom checksize
 tests: clean assemble_libs_tests compile_tests link_tests rom
@@ -30,8 +30,9 @@ compile_release:
 
 compile_tests:
 	$(CC) $(COMPILE_FLAGS) -c tests/main.c -o obj/main.rel
-	$(CC) $(COMPILE_FLAGS) -c tests/lisp_tests.c -o obj/lisp_tests.rel
 	$(CC) $(COMPILE_FLAGS) -c src/cons_cell.c -o obj/cons_cell.rel
+	$(CC) $(COMPILE_FLAGS) -c tests/lisp_tests.c -o obj/lisp_tests.rel
+	$(CC) $(COMPILE_FLAGS) -c tests/cons_cell_tests.c -o obj/cons_cell_tests.rel
 
 link:
 	$(CC) -o bin/zlisp.ihx $(LINK_FLAGS) $(REL_FILES)

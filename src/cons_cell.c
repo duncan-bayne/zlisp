@@ -13,7 +13,8 @@ cons_cell *new_cell(cell_payload car, cell_payload cdr, cell_flags flags)
   return cell;
 }
 
-void print_cell(cons_cell *cell)
+/* TODO: buffer overrun */
+void print_cell(char *buffer, cons_cell *cell)
 {
-  printf("(%ld . %ld)\r\n", cell->car, cell->cdr);
+  sprintf(buffer, "(%ld . %ld)", cell->car, cell->cdr);
 }

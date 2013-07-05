@@ -16,6 +16,6 @@ typedef struct cons_cell
 } cons_cell;
 
 cons_cell *new_cell(cell_payload car, cell_payload cdr, cell_flags flags);
-void print_cell(cons_cell *cell);
+void print_cell(char *buffer, cons_cell *cell);
 
 #endif /* __cons_cell_h__ */
