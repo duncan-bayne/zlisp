@@ -5,14 +5,17 @@
 #include <stdio.h>
 #include "assert.h"
 
+typedef unsigned int cell_flags;
+typedef unsigned long cell_payload;
+
 typedef struct cons_cell
 {
-  unsigned long car;
-  unsigned long cdr;
-  unsigned int flags;
+  cell_payload car;
+  cell_payload cdr;
+  cell_flags flags;
 } cons_cell;
 
-cons_cell *new_cell(unsigned long car, unsigned long cdr, unsigned int flags);
+cons_cell *new_cell(cell_payload car, cell_payload cdr, cell_flags flags);
 void print_cell(cons_cell *cell);
 
 #endif /* __cons_cell_h__ */

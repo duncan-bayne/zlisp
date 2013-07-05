@@ -1,6 +1,6 @@
 #include "cons_cell.h"
 
-cons_cell *new_cell(unsigned long car, unsigned long cdr, unsigned int flags)
+cons_cell *new_cell(cell_payload car, cell_payload cdr, cell_flags flags)
 {
   cons_cell *cell;
 
