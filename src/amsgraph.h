@@ -3,7 +3,7 @@
    2003 H. Hansen
 */
 
-#ifndef  __amsgraph_h__
+#ifndef __amsgraph_h__
 #define __amsgraph_h__
 
 void draw(int x, int y);

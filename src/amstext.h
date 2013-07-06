@@ -1,4 +1,4 @@
-#ifndef  __amstext_h__
+#ifndef __amstext_h__
 #define __amstext_h__
 
 void mode(int modey);

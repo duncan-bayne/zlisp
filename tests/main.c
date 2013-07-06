@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include "../src/amsgraph.h"
 #include "../src/amstext.h"
-#include "../src/lisp.h"
 #include "test_helpers.h"
 #include "lisp_tests.h"
 #include "cons_cell_tests.h"
