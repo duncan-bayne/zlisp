@@ -1,6 +1,6 @@
 #include "cons_cell_tests.h"
 
-char *cts_buffer;
+char *cct_buffer;
 
 void _test_print_dotted_pair()
 {
@@ -9,8 +9,8 @@ void _test_print_dotted_pair()
 
   cons_cell *cell = new_cell(&one, FLAG_IS_INT, plus, FLAG_IS_SYMBOL);
 
-  print_cell(cts_buffer, cell);
-  assert(strncmp(cts_buffer, "(1 . +)", TEST_BUFFER_SIZE) == 0);
+  print_cell(cct_buffer, cell);
+  assert(strncmp(cct_buffer, "(1 . +)", TEST_BUFFER_SIZE) == 0);
   free(cell);
 }
 
@@ -24,8 +24,8 @@ void _test_print_list()
   cons_cell *cell_2 = new_cell(plus, FLAG_IS_SYMBOL, cell_3, FLAG_IS_POINTER);
   cons_cell *cell_1 = new_cell(&one, FLAG_IS_INT, cell_2, FLAG_IS_POINTER);
 
-  print_cell(cts_buffer, cell_1);
-  assert(strncmp(cts_buffer, "(1 + \"hello\")", TEST_BUFFER_SIZE) == 0);
+  print_cell(cct_buffer, cell_1);
+  assert(strncmp(cct_buffer, "(1 + \"hello\")", TEST_BUFFER_SIZE) == 0);
   free(cell_1);
   free(cell_2);
   free(cell_3);
@@ -47,8 +47,8 @@ void _test_print_list_of_lists()
   cons_cell *cell_2 = new_cell(cell_5, FLAG_IS_POINTER, NULL, FLAG_IS_POINTER);
   cons_cell *cell_1 = new_cell(cell_3, FLAG_IS_POINTER, cell_2, FLAG_IS_POINTER);
 
-  print_cell(cts_buffer, cell_1);
-  assert(strncmp(cts_buffer, "((1 2) (3 4))", TEST_BUFFER_SIZE) == 0);
+  print_cell(cct_buffer, cell_1);
+  assert(strncmp(cct_buffer, "((1 2) (3 4))", TEST_BUFFER_SIZE) == 0);
 
   free(cell_1);
   free(cell_2);
@@ -60,12 +60,11 @@ void _test_print_list_of_lists()
 
 void run_cons_cell_tests()
 {
-  /* TODO: buffer overrun */
-  cts_buffer = malloc(TEST_BUFFER_SIZE);
+  cct_buffer = malloc(TEST_BUFFER_SIZE);
 
   RUN_TEST(_test_print_dotted_pair);
   RUN_TEST(_test_print_list);
   RUN_TEST(_test_print_list_of_lists);
 
-  free(cts_buffer);
+  free(cct_buffer);
 }

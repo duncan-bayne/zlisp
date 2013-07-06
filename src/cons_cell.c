@@ -74,3 +74,24 @@ void print_cell(char *buffer, cons_cell *cell)
 
   _print_list(buffer, cell);
 }
+
+void free_cell(cons_cell *cell)
+{
+  if (cell->car_flags & FLAG_IS_POINTER) {
+    free_cell((cons_cell *)cell->car);
+  }
+
+  if (cell->cdr_flags & FLAG_IS_POINTER) {
+    free_cell((cons_cell *)cell->cdr);
+  }
+
+  if (cell->car_flags & FLAG_IS_STRING) {
+    free((char *)cell->car);
+  }
+
+  if (cell->cdr_flags & FLAG_IS_STRING) {
+    free((char *)cell->cdr);
+  }
+
+  free(cell);
+}
