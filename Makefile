@@ -1,12 +1,12 @@
 CC = sdcc
 LINK_FLAGS = --no-std-crt0 -mz80 --opt-code-size --code-loc 0xC100 --data-loc 0x1000
 COMPILE_FLAGS = --no-std-crt0 -mz80 --opt-code-size --code-loc 0xC100 --data-loc 0x1000 --Werror
-COMMON_REL_FILES = obj/crt0.rel obj/amsgraph.rel obj/amstext.rel obj/cons_cell.rel
+COMMON_REL_FILES = obj/crt0.rel obj/amsgraph.rel obj/amstext.rel obj/cons_cell.rel obj/heap.rel
 REL_FILES = $(COMMON_REL_FILES) obj/main.rel
 TEST_REL_FILES = $(COMMON_REL_FILES) obj/lisp_tests.rel obj/cons_cell_tests.rel obj/main.rel
 
-all: clean assemble_libs_release compile_release link rom checksize
-tests: clean assemble_libs_tests compile_tests link_tests rom
+all: clean assemble_libs_common assemble_libs_release compile_release link rom checksize
+tests: clean assemble_libs_common assemble_libs_tests compile_tests link_tests rom
 
 clean:
 	rm -rf bin
@@ -16,13 +16,14 @@ clean:
 
 assemble_libs_release:
 	sdasz80 -o ./obj/crt0.rel src/crt0.s
-	sdasz80 -o ./obj/amsgraph.rel src/amsgraph.s
-	sdasz80 -o ./obj/amstext.rel src/amstext.s
 
 assemble_libs_tests:
 	sdasz80 -o ./obj/crt0.rel src/crt0_test.s
+
+assemble_libs_common:
 	sdasz80 -o ./obj/amsgraph.rel src/amsgraph.s
 	sdasz80 -o ./obj/amstext.rel src/amstext.s
+	sdasz80 -o ./obj/heap.rel src/heap.s
 
 compile_release:
 	$(CC) $(COMPILE_FLAGS) -c src/main.c -o obj/main.rel
