@@ -2,6 +2,7 @@
 
 void _print_dotted_pair(char *buffer, cons_cell *cell);
 void _print_list(char *buffer, cons_cell *cell);
+char *_print_value(char *buffer, void *ptr, cell_flags flags);
 
 void _print_dotted_pair(char *buffer, cons_cell *cell)
 {
@@ -10,26 +11,36 @@ void _print_dotted_pair(char *buffer, cons_cell *cell)
 
   car = *((long *)cell->car);
   cdr = *((long *)cell->cdr);
+
   sprintf(buffer, "(%ld . %ld)", car, cdr);
 }
 
 void _print_list(char *buffer, cons_cell *cell)
 {
   cons_cell *current;
-  int chars;
-  long car;
 
-  chars = sprintf(buffer, "(");
-  buffer += chars;
+  buffer += sprintf(buffer, "(");
 
   for (current = cell; current != NULL; current = current->cdr) {
-    car = *((long *)cell->car);
-    chars = sprintf(buffer, "%ld ", car);
-    buffer += chars;
+    buffer = _print_value(buffer, current->car, current->car_flags);
   }
 
   buffer--;
   sprintf(buffer, ")");
+}
+
+char *_print_value(char *buffer, void *ptr, cell_flags flags)
+{
+  if (flags & FLAG_IS_INT) {
+    return buffer + sprintf(buffer, "%ld ", *((long *)ptr));
+  }
+
+  if (flags & FLAG_IS_STRING) {
+    return buffer + sprintf(buffer, "\"%ls\" ", (char *)ptr);
+  }
+
+  assert(0);
+  return NULL;
 }
 
 cons_cell *new_cell(void *car, cell_flags car_flags, void *cdr, cell_flags cdr_flags)

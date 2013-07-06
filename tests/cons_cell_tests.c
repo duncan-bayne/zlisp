@@ -18,13 +18,14 @@ void _test_print_list()
 {
   long one = 1;
   long two = 2;
-  long three = 3;
-  cons_cell *cell_3 = new_cell(&three, FLAG_IS_INT, NULL, FLAG_IS_POINTER);
+  const char *hello = "hello";
+
+  cons_cell *cell_3 = new_cell(hello, FLAG_IS_STRING, NULL, FLAG_IS_POINTER);
   cons_cell *cell_2 = new_cell(&two, FLAG_IS_INT, cell_3, FLAG_IS_POINTER);
   cons_cell *cell_1 = new_cell(&one, FLAG_IS_INT, cell_2, FLAG_IS_POINTER);
 
   print_cell(buffer, cell_1);
-  assert(strncmp(buffer, "(1 2 3)", BUFFER_SIZE) == 0);
+  assert(strncmp(buffer, "(1 2 \"hello\")", BUFFER_SIZE) == 0);
   free(cell_1);
   free(cell_2);
   free(cell_3);
