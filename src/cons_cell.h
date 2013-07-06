@@ -8,6 +8,7 @@
 #define FLAG_IS_INT 1
 #define FLAG_IS_POINTER 2
 #define FLAG_IS_STRING 4
+#define FLAG_IS_SYMBOL 8
 
 typedef unsigned int cell_flags;
 

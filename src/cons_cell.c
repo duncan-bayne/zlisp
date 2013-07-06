@@ -6,13 +6,11 @@ char *_print_value(char *buffer, void *ptr, cell_flags flags);
 
 void _print_dotted_pair(char *buffer, cons_cell *cell)
 {
-  long car;
-  long cdr;
-
-  car = *((long *)cell->car);
-  cdr = *((long *)cell->cdr);
-
-  sprintf(buffer, "(%ld . %ld)", car, cdr);
+  buffer += sprintf(buffer, "(");
+  buffer = _print_value(buffer, cell->car, cell->car_flags);
+  buffer += sprintf(buffer, ". ");
+  buffer = _print_value(buffer, cell->cdr, cell->cdr_flags);
+  buffer += sprintf(buffer - 1, ")");
 }
 
 void _print_list(char *buffer, cons_cell *cell)
@@ -37,6 +35,10 @@ char *_print_value(char *buffer, void *ptr, cell_flags flags)
 
   if (flags & FLAG_IS_STRING) {
     return buffer + sprintf(buffer, "\"%ls\" ", (char *)ptr);
+  }
+
+  if (flags & FLAG_IS_SYMBOL) {
+    return buffer + sprintf(buffer, "%ls ", (char *)ptr);
   }
 
   assert(0);
