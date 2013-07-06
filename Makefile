@@ -3,7 +3,7 @@ LINK_FLAGS = --no-std-crt0 -mz80 --opt-code-size --code-loc 0xC100 --data-loc 0x
 COMPILE_FLAGS = --no-std-crt0 -mz80 --opt-code-size --code-loc 0xC100 --data-loc 0x1000 --Werror
 COMMON_REL_FILES = obj/crt0.rel obj/amsgraph.rel obj/amstext.rel obj/cons_cell.rel obj/heap.rel obj/parser.rel obj/main.rel
 REL_FILES = $(COMMON_REL_FILES)
-TEST_REL_FILES = $(COMMON_REL_FILES) obj/lisp_tests.rel obj/cons_cell_tests.rel obj/parser_tests.rel
+TEST_REL_FILES = $(COMMON_REL_FILES) obj/test_helpers.rel obj/lisp_tests.rel obj/cons_cell_tests.rel obj/parser_tests.rel
 
 all: clean assemble_libs_common assemble_libs_release compile_release link rom checksize
 tests: clean assemble_libs_common assemble_libs_tests compile_tests link_tests rom
@@ -34,6 +34,7 @@ compile_tests:
 	$(CC) $(COMPILE_FLAGS) -c src/cons_cell.c -o obj/cons_cell.rel
 	$(CC) $(COMPILE_FLAGS) -c src/parser.c -o obj/parser.rel
 	$(CC) $(COMPILE_FLAGS) -c tests/main.c -o obj/main.rel
+	$(CC) $(COMPILE_FLAGS) -c tests/test_helpers.c -o obj/test_helpers.rel
 	$(CC) $(COMPILE_FLAGS) -c tests/lisp_tests.c -o obj/lisp_tests.rel
 	$(CC) $(COMPILE_FLAGS) -c tests/cons_cell_tests.c -o obj/cons_cell_tests.rel
 	$(CC) $(COMPILE_FLAGS) -c tests/parser_tests.c -o obj/parser_tests.rel

@@ -1,32 +1,7 @@
 #include "cons_cell.h"
 
-void _print_dotted_pair(char *buffer, cons_cell *cell);
 char *_print_list(char *buffer, cons_cell *cell);
 char *_print_value(char *buffer, void *ptr, cell_flags flags);
-
-void _print_dotted_pair(char *buffer, cons_cell *cell)
-{
-  buffer += sprintf(buffer, "(");
-  buffer = _print_value(buffer, cell->car, cell->car_flags);
-  buffer += sprintf(buffer, ". ");
-  buffer = _print_value(buffer, cell->cdr, cell->cdr_flags);
-  buffer += sprintf(buffer - 1, ")");
-}
-
-char *_print_list(char *buffer, cons_cell *cell)
-{
-  cons_cell *current;
-
-  buffer += sprintf(buffer, "(");
-
-  for (current = cell; current != NULL; current = current->cdr) {
-    buffer = _print_value(buffer, current->car, current->car_flags);
-  }
-
-  buffer--;
-  buffer += sprintf(buffer, ")");
-  return buffer;
-}
 
 char *_print_value(char *buffer, void *ptr, cell_flags flags)
 {
@@ -43,7 +18,7 @@ char *_print_value(char *buffer, void *ptr, cell_flags flags)
   }
 
   if (flags & FLAG_IS_POINTER) {
-    buffer = _print_list(buffer, (cons_cell *)ptr);
+    buffer = print_cell(buffer, (cons_cell *)ptr);
     return buffer + sprintf(buffer, " ");
   }
 
@@ -65,14 +40,19 @@ cons_cell *new_cell(void *car, cell_flags car_flags, void *cdr, cell_flags cdr_f
 }
 
 /* TODO: buffer overrun */
-void print_cell(char *buffer, cons_cell *cell)
+char *print_cell(char *buffer, cons_cell *cell)
 {
-  if (!(cell->car_flags & FLAG_IS_POINTER) && !(cell->cdr_flags & FLAG_IS_POINTER)) {
-    _print_dotted_pair(buffer, cell);
-    return;
+  cons_cell *current;
+
+  buffer += sprintf(buffer, "(");
+
+  for (current = cell; current != NULL; current = current->cdr) {
+    buffer = _print_value(buffer, current->car, current->car_flags);
   }
 
-  _print_list(buffer, cell);
+  buffer--;
+  buffer += sprintf(buffer, ")");
+  return buffer;
 }
 
 void free_cell(cons_cell *cell)

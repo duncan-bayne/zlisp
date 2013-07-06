@@ -2,23 +2,11 @@
 
 char *cct_buffer;
 
-void _test_print_dotted_pair()
-{
-  long one = 1;
-  const char *plus = "+";
-
-  cons_cell *cell = new_cell(&one, FLAG_IS_INT, plus, FLAG_IS_SYMBOL);
-
-  print_cell(cct_buffer, cell);
-  assert(strncmp(cct_buffer, "(1 . +)", TEST_BUFFER_SIZE) == 0);
-  free(cell);
-}
-
 void _test_print_list()
 {
   long one = 1;
-  const char *plus = "+";
-  const char *hello = "hello";
+  char *plus = strdup("+");
+  char *hello = strdup("hello");
 
   cons_cell *cell_3 = new_cell(hello, FLAG_IS_STRING, NULL, FLAG_IS_POINTER);
   cons_cell *cell_2 = new_cell(plus, FLAG_IS_SYMBOL, cell_3, FLAG_IS_POINTER);
@@ -26,9 +14,7 @@ void _test_print_list()
 
   print_cell(cct_buffer, cell_1);
   assert(strncmp(cct_buffer, "(1 + \"hello\")", TEST_BUFFER_SIZE) == 0);
-  free(cell_1);
-  free(cell_2);
-  free(cell_3);
+  free_cell(cell_1);
 }
 
 void _test_print_list_of_lists()
@@ -50,19 +36,13 @@ void _test_print_list_of_lists()
   print_cell(cct_buffer, cell_1);
   assert(strncmp(cct_buffer, "((1 2) (3 4))", TEST_BUFFER_SIZE) == 0);
 
-  free(cell_1);
-  free(cell_2);
-  free(cell_3);
-  free(cell_4);
-  free(cell_5);
-  free(cell_6);
+  free_cell(cell_1);
 }
 
 void run_cons_cell_tests()
 {
   cct_buffer = malloc(TEST_BUFFER_SIZE);
 
-  RUN_TEST(_test_print_dotted_pair);
   RUN_TEST(_test_print_list);
   RUN_TEST(_test_print_list_of_lists);
 
