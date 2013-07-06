@@ -15,12 +15,12 @@
 
     ; RSX jump block
     jp init_rom                 ; initialisation routine
-    jp run_game                 ; first RSX command (see table)
+    jp run_repl                 ; first RSX command (see table)
 
 rsx_name_table:                 ; NOTE: the "ascis" directive sets the highest bit of the last character
     .ascis "Init ROM"           ; initialisation routine - executed when CPC during boot process
 				; use a name, which you can't execute from BASIC here
-    .ascis "GAME"               ; to start the game, you type "|GAME" in BASIC
+    .ascis "REPL"               ; to start the REPL, you type "|REPL" in BASIC
     .db 0                       ; end of the RSX command table
 
 init_rom:                       ; show ROM initialisation message
@@ -36,7 +36,7 @@ init_msg:
     .ascii "Enter |REPL to start the Lisp REPL."
     .db 24, 10, 13, 10, 13, 0xFF
 
-run_game:
+run_repl:
     ; Get the ROM number
     call 0xB912                 ; KL_CURR_SELECTION (A = ROM select address for our rom)
     ld (0x4000), a              ; Save the rom number in a variable in ram
