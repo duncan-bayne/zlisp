@@ -3,18 +3,31 @@
 const unsigned int BUFFER_SIZE = 512;
 char *buffer;
 
-void _test_sizes()
+void _test_print_dotted_pair()
 {
-  /* we rely on the fact that floats are no longer than unsigned longs on this platform */
-  assert(sizeof(float) <= sizeof(unsigned long));
-  assert(sizeof(float) <= sizeof(cell_payload));
-}
+  long one = 1;
+  long two = 2;
+  cons_cell *cell = new_cell(&one, FLAG_IS_INT, &two, FLAG_IS_INT);
 
-void _test_print_cell()
-{
-  cons_cell *cell = new_cell(1, FLAG_IS_INT, 2, FLAG_IS_INT);
   print_cell(buffer, cell);
   assert(strncmp(buffer, "(1 . 2)", BUFFER_SIZE) == 0);
+  free(cell);
+}
+
+void _test_print_list()
+{
+  long one = 1;
+  long two = 2;
+  long three = 3;
+  cons_cell *cell_3 = new_cell(&three, FLAG_IS_INT, NULL, FLAG_IS_POINTER);
+  cons_cell *cell_2 = new_cell(&two, FLAG_IS_INT, cell_3, FLAG_IS_POINTER);
+  cons_cell *cell_1 = new_cell(&one, FLAG_IS_INT, cell_2, FLAG_IS_POINTER);
+
+  print_cell(buffer, cell_1);
+  assert(strncmp(buffer, "(1 2 3)", BUFFER_SIZE) == 0);
+  free(cell_1);
+  free(cell_2);
+  free(cell_3);
 }
 
 void run_cons_cell_tests()
@@ -22,6 +35,6 @@ void run_cons_cell_tests()
   /* TODO: buffer overrun */
   buffer = malloc(BUFFER_SIZE);
 
-  RUN_TEST(_test_print_cell);
-  RUN_TEST(_test_sizes);
+  RUN_TEST(_test_print_dotted_pair);
+  RUN_TEST(_test_print_list);
 }
