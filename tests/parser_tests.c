@@ -82,8 +82,8 @@ void run_parser_tests()
   /* RUN_TEST(_test_parse_list_with_single_item); */
   /* RUN_TEST(_test_parse_nil); */
   RUN_TEST(_test_parse_int_atom);
-  /* RUN_TEST(_test_parse_string_atom); */
-  /* RUN_TEST(_test_parse_symbol_atom); */
+  RUN_TEST(_test_parse_string_atom);
+  RUN_TEST(_test_parse_symbol_atom);
 
   free(pt_buffer);
 }
