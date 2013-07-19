@@ -2,6 +2,10 @@
 
 char *pt_buffer;
 
+void _test_invalid_list()
+{
+}
+
 void _test_parse_list()
 {
   cons_cell *cell;
@@ -28,8 +32,9 @@ void run_parser_tests()
 {
   pt_buffer = malloc(TEST_BUFFER_SIZE);
 
-  RUN_TEST(_test_parse_list);
-  RUN_TEST(_test_parse_list_of_lists);
+  /* RUN_TEST(_test_parse_invalid_list); */
+  /* RUN_TEST(_test_parse_list); */
+  /* RUN_TEST(_test_parse_list_of_lists); */
 
   free(pt_buffer);
 }

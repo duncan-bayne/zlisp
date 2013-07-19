@@ -9,6 +9,7 @@
 #define FLAG_IS_POINTER 2
 #define FLAG_IS_STRING 4
 #define FLAG_IS_SYMBOL 8
+#define FLAG_IS_EMPTY 16
 
 typedef unsigned int cell_flags;
 
@@ -21,7 +22,7 @@ typedef struct cons_cell
 } cons_cell;
 
 cons_cell *new_cell(void *car, cell_flags car_flags, void *cdr, cell_flags cdr_flags);
-char *print_cell(char *buffer, cons_cell *cell);
+void print_cell(char *buffer, cons_cell *cell);
 void free_cell(cons_cell *cell);
 
 #endif /* __cons_cell_h__ */
