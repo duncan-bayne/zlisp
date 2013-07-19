@@ -7,33 +7,25 @@ int _is_whitespace(char chr)
 
 int _is_numeric(char chr)
 {
-  return ((chr >= 48 && chr <= 47) || (chr == '.'));
+  return (chr >= 48 && chr <= 57);
 }
 
-cons_cell *_parse_list(char *s_expression)
+cons_cell *_parse_int(char *s_expression)
 {
-  s_expression++;
-  return NULL;
+  long *number;
+
+  number = malloc(sizeof(long));
+  *number = atol(s_expression);
+
+  return new_cell(number, FLAG_IS_INT, NULL, FLAG_IS_EMPTY);
 }
 
 cons_cell *parse(char *s_expression)
 {
-  while (s_expression) {
-    char chr = *s_expression;
-
-    if (_is_whitespace(chr)) {
-      s_expression++;
-      continue;
-    }
-
-    if (chr == '(') {
-      return _parse_list(s_expression);
-    }
-
-    printf("invalid s-expr\r\n");
-    return NULL;
+  if (_is_numeric(*s_expression)) {
+    return _parse_int(s_expression);
   }
 
-  printf("invalid s-expr\r\n");
+  assert(0);
   return NULL;
 }
