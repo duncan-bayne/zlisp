@@ -1,8 +1,16 @@
 #include "readline.h"
 
-long readline(char *buffer, long buffer_size)
+void readline(char *buffer, long buffer_size)
 {
-  sprintf(buffer, "9");
-  buffer_size++;
-  return 2;
+  do {
+    *buffer = waitchar();
+    if (*buffer == '\r') {
+      break;
+    }
+    printf("%c", *buffer);
+    buffer++;
+  } while (buffer < buffer + buffer_size);
+
+  buffer = NULL;
+  return;
 }

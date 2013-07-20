@@ -2,7 +2,8 @@
 #define __readline_h__
 
 #include <stdio.h>
+#include "amstext.h"
 
-long readline(char *buffer, long buffer_size);
+void readline(char *buffer, long buffer_size);
 
 #endif /* __readline_h__ */
