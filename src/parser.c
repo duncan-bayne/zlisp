@@ -37,9 +37,11 @@ cons_cell *_parse_string(char *s_expression)
   char *delimiter;
 
   delimiter = strchr(s_expression + 1, '"');
-  length = (delimiter - s_expression) - 1;
-  string = malloc(length);
-  strncpy(string, s_expression + 1, length);
+  length = (delimiter - s_expression);
+  string = malloc(length + 1);
+  strncpy(string, s_expression + 1, length - 1);
+  string[length] = 0;
+
   return new_cell(string, FLAG_IS_STRING, NULL, FLAG_IS_EMPTY);
 }
 
@@ -56,8 +58,10 @@ cons_cell *_parse_symbol(char *s_expression)
     tmp++;
   }
 
-  string = malloc(length);
+  string = malloc(length + 1);
   strncpy(string, s_expression, length);
+  string[length] = 0;
+
   return new_cell(string, FLAG_IS_SYMBOL, NULL, FLAG_IS_EMPTY);
 }
 

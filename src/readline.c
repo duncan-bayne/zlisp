@@ -11,6 +11,6 @@ void readline(char *buffer, long buffer_size)
     buffer++;
   } while (buffer < buffer + buffer_size);
 
-  buffer = NULL;
+  *buffer = 0;
   return;
 }
