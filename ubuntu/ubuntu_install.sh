@@ -1,4 +1,5 @@
 sudo apt-get install -y wine unzip sdcc
+rm -rf wincpc
 mkdir wincpc
 
 pushd wincpc
