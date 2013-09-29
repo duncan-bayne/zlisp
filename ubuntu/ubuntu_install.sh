@@ -1,4 +1,4 @@
-sudo apt-get install -y wine unzip
+sudo apt-get install -y wine unzip sdcc
 mkdir wincpc
 
 pushd wincpc
