@@ -5,8 +5,6 @@
 
 #include "amsgraph.h"
 #include "amstext.h"
-#include "cons_cell.h"
-#include "parser.h"
 #include "readline.h"
 
 void repl();
