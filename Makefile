@@ -53,4 +53,4 @@ rom:
 	utils/hex2bin -e rom bin/zlisp.ihx
 
 checksize:
-	utils/check16k.sh
+	./utils/check16k.sh
