@@ -1,12 +1,12 @@
 CC = sdcc
 LINK_FLAGS = --no-std-crt0 -mz80 --opt-code-size --code-loc 0xC100 --data-loc 0x1000
-COMPILE_FLAGS = --no-std-crt0 -mz80 --opt-code-size --code-loc 0xC100 --data-loc 0x1000 --Werror
-COMMON_REL_FILES = obj/crt0.rel obj/amsgraph.rel obj/amstext.rel obj/heap.rel obj/readline.rel obj/repl.rel obj/main.rel
+COMPILE_FLAGS = --std-c99 --no-std-crt0 -mz80 --opt-code-size --code-loc 0xC100 --data-loc 0x1000 --Werror
+COMMON_REL_FILES = obj/crt0.rel obj/amsgraph.rel obj/amstext.rel obj/heap.rel obj/readline.rel obj/repl.rel obj/atom.rel obj/main.rel
 REL_FILES = $(COMMON_REL_FILES)
-TEST_REL_FILES = $(COMMON_REL_FILES) obj/test_helpers.rel obj/lisp_tests.rel
+TEST_REL_FILES = $(COMMON_REL_FILES) obj/test_helpers.rel obj/lisp_tests.rel obj/atom_tests.rel
 
 all: clean assemble_libs_common assemble_libs_release compile_release link rom checksize
-tests: clean assemble_libs_common assemble_libs_tests compile_tests link_tests rom
+tests: clean assemble_libs_common assemble_libs_tests compile_tests link_tests rom emulate
 
 clean:
 	rm -rf bin
@@ -29,13 +29,16 @@ compile_release:
 	$(CC) $(COMPILE_FLAGS) -c src/main.c -o obj/main.rel
 	$(CC) $(COMPILE_FLAGS) -c src/readline.c -o obj/readline.rel
 	$(CC) $(COMPILE_FLAGS) -c src/repl.c -o obj/repl.rel
+	$(CC) $(COMPILE_FLAGS) -c src/atom.c -o obj/atom.rel
 
 compile_tests:
 	$(CC) $(COMPILE_FLAGS) -c tests/main.c -o obj/main.rel
 	$(CC) $(COMPILE_FLAGS) -c src/readline.c -o obj/readline.rel
 	$(CC) $(COMPILE_FLAGS) -c src/repl.c -o obj/repl.rel
+	$(CC) $(COMPILE_FLAGS) -c src/atom.c -o obj/atom.rel
 	$(CC) $(COMPILE_FLAGS) -c tests/test_helpers.c -o obj/test_helpers.rel
 	$(CC) $(COMPILE_FLAGS) -c tests/lisp_tests.c -o obj/lisp_tests.rel
+	$(CC) $(COMPILE_FLAGS) -c tests/atom_tests.c -o obj/atom_tests.rel
 
 link:
 	$(CC) -o bin/zlisp.ihx $(LINK_FLAGS) $(REL_FILES)
