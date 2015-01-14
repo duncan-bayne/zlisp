@@ -1,7 +1,7 @@
 #ifndef __lisp_tests_h__
 #define __lisp_tests_h__
 
-#include <malloc.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include "assert.h"
 #include "test_helpers.h"
