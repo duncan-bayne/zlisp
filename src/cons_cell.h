@@ -24,7 +24,7 @@ typedef struct cons_cell
   void *cdr;
 } cons_cell;
 
-atom *create_cons_cell(cons_cell_flags flags, void *car, void *cdr);
+cons_cell *create_cons_cell(cons_cell_flags flags, void *car, void *cdr);
 void free_cons_cell(cons_cell *cell);
 
 #endif /* __cons_cell_h__ */
