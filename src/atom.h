@@ -5,8 +5,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define BUFFER_SIZE 1024
-
 enum atom_types {
   ATOM_TYPE_INT,
   ATOM_TYPE_FLOAT,
@@ -29,7 +27,6 @@ typedef struct atom
   union atom_contents contents;
 } atom;
 
-bool is_atom(void *item);
 atom *create_atom(atom_type type, union atom_contents *contents);
 void free_atom(atom *atom);
 
