@@ -67,5 +67,4 @@ void run_atom_tests()
   RUN_TEST(_test_atom_float);
   RUN_TEST(_test_atom_symbol);
   RUN_TEST(_test_atom_string);
-
 }
