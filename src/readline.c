@@ -1,6 +1,6 @@
 #include "readline.h"
 
-void readline(char *buffer, long buffer_size)
+void readline(char *buffer, int buffer_size)
 {
   do {
     *buffer = waitchar();

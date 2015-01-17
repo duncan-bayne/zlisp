@@ -4,6 +4,6 @@
 #include <stdio.h>
 #include "amstext.h"
 
-void readline(char *buffer, long buffer_size);
+void readline(char *buffer, int buffer_size);
 
 #endif /* __readline_h__ */

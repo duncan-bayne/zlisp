@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "test_helpers.h"
 
 char *strdup(char *str)
@@ -6,6 +7,16 @@ char *strdup(char *str)
   strcpy(buffer, str);
   return buffer;
 }
+
+int *intdup(int n)
+{
+  int *buffer;
+
+  buffer = malloc(sizeof(int));
+  assert(buffer);
+  *buffer = n;
+
+  return buffer;}
 
 void assert_equal_str(char *expected, char *actual)
 {
