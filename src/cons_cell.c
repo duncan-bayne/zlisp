@@ -91,6 +91,11 @@ void free_cons_cell(cons_cell *cell)
   free(cell);
 }
 
+bool is_atom(cons_cell *cell)
+{
+  return (cell->car_type != CONS_CELL_CONS_CELL && cell->cdr_type != CONS_CELL_CONS_CELL);
+}
+
 bool is_empty_list(cons_cell *cell)
 {
   return (cell->car_type == CONS_CELL_NIL && cell->cdr_type == CONS_CELL_NIL);

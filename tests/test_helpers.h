@@ -6,7 +6,8 @@
 #include <stdlib.h>
 #include "assert.h"
 
-#define RUN_TEST(a) printf("%s:%d ... ", __FILE__, __LINE__); a(); printf("OK\r\n");
+#define RUN_TEST(a) printf("%s:%d ... ", __FILE__, __LINE__); a(); printf("\r\n");
+#define CU_ASSERT(a) if (a) { printf("."); } else { printf("F"); }
 #define TEST_BUFFER_SIZE 512
 
 char *strdup(char *str);

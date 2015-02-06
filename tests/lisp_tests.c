@@ -6,7 +6,7 @@ void _test_heap_size()
 {
   /* SDCC defaults to a 1kB heap size; check we have > 30kB to play with */
   void *block = malloc(30720);
-  assert(block != NULL);
+  CU_ASSERT(block != NULL);
   free(block);
 }
 
