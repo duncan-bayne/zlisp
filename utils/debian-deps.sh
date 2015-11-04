@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 #
 # Get dependencies on an Debian-like system (e.g. Debian, Ubuntu, Mint ...)
 #
