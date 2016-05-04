@@ -1,1 +1,1 @@
-See the [Zlisp wiki](https://github.com/duncan-bayne/zlisp/wiki) for everything.
+This project is now hosted at [GitLab](https://gitlab.com/duncan-bayne/zlisp).
